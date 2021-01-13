@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1")
@@ -22,6 +22,18 @@ public class ClientController {
     public List<ClientModel> getAllClients() {
         return clientService.getAllClients();
     }
+
+    @GetMapping("/total-clients")
+    public int totalClients(){
+        return clientService.getTotalClients();
+    }
+
+    @GetMapping("/profile/{clientId}")
+    public ClientModel clientProfile(@PathVariable("clientId") long clientId){
+
+        return clientService.getClient(clientId).orElse(null);
+    }
+
 
     @PostMapping("/add-client")
     public ResponseEntity<String> addClient(@RequestBody ClientRequest request) {
