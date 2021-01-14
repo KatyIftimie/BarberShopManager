@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -40,4 +41,11 @@ public class ClientService {
 
     }
 
+    public int getTotalClients() {
+        return clientRepository.findAll().size();
+    }
+
+    public Optional<ClientModel> getClient(long clientId) {
+        return clientRepository.findById(clientId);
+    }
 }
