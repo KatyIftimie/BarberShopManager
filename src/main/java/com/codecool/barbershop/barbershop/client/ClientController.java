@@ -29,9 +29,9 @@ public class ClientController {
     }
 
     @GetMapping("/profile/{clientId}")
-    public ClientModel clientProfile(@PathVariable("clientId") long clientId){
+    public ClientModel clientProfile(@PathVariable("clientId") long clientId) throws Exception {
 
-        return clientService.getClient(clientId).orElse(null);
+        return clientService.getClientById(clientId);
     }
 
 

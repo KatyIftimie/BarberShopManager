@@ -45,7 +45,9 @@ public class ClientService {
         return clientRepository.findAll().size();
     }
 
-    public Optional<ClientModel> getClient(long clientId) {
-        return clientRepository.findById(clientId);
+    public ClientModel getClientById(long clientId) throws Exception {
+        Optional<ClientModel> clientModel = clientRepository.findById(clientId);
+
+        return clientModel.orElseThrow(() -> new Exception("Client not found id:" + clientId) );
     }
 }
