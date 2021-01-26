@@ -1,62 +1,63 @@
 package com.codecool.barbershop.barbershop.client;
 
-import lombok.AllArgsConstructor;
+import com.codecool.barbershop.barbershop.client.request.ClientRequest;
+import com.codecool.barbershop.barbershop.client.request.ClientSearchAutocompleteReq;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@AllArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1/clients")
 public class ClientController {
 
-    private final ClientService clientService;
-    private final ClientRepository clientRepository;
+    private  ClientService clientService;
 
-    @Transactional
-    @GetMapping("/clients")
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    @GetMapping()
     public List<ClientModel> getAllClients() {
         return clientService.getAllClients();
     }
 
-    @GetMapping("/total-clients")
-    public int totalClients(){
-        return clientService.getTotalClients();
-    }
 
-    @GetMapping("/profile/{clientId}")
+    @GetMapping("{clientId}")
     public ClientModel clientProfile(@PathVariable("clientId") long clientId) throws Exception {
-
         return clientService.getClientById(clientId);
     }
 
-
-    @PostMapping("/add-client")
+    @PostMapping()
     public ResponseEntity<String> addClient(@RequestBody ClientRequest request) {
         ClientModel client = clientService.addClient(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPhoneNo());
         return new ResponseEntity<>(Long.toString(client.getClientId()), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{clientId}")
+    @PutMapping("{clientId}")
     public ResponseEntity<ClientModel> updateClientById(@PathVariable("clientId") long clientId,
                                                         @RequestBody ClientModel clientToUpdate) {
         ClientModel client = clientService.updateClientById(clientId, clientToUpdate);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
-    @Transactional
-    @DeleteMapping("/delete/{clientId}")
-    public void deleteClientByID(@PathVariable("clientId") String clientId) {
-        List<ClientModel> clients= clientService.getAllClients();
-        for(ClientModel client : clients) {
-            if(client.getClientId() == Long.valueOf(clientId)) {
-                clientService.deleteClient(Long.valueOf(clientId));
-            }
-        }
+    @DeleteMapping("{clientId}")
+    public void deleteClientByID(@PathVariable("clientId") Long clientId) throws Exception {
+        clientService.deleteClient(clientId);
     }
+
+    @GetMapping("search-client")
+    public List<ClientSearchAutocompleteReq> searchClientWithAutocomplete(){
+        return clientService.searchClientWithAutocomplete();
+    }
+    @GetMapping("total-clients")
+    public int totalClients(){
+        return clientService.getTotalClients();
+    }
+
 
 }

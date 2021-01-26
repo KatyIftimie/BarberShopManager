@@ -26,7 +26,7 @@ public class BookingModel {
     @Column(nullable = false, updatable = false)
     private Date createdDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date bookingDate;
 
     @Temporal(TemporalType.TIMESTAMP)

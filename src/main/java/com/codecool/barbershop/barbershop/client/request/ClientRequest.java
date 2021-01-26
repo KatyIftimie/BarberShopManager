@@ -1,4 +1,4 @@
-package com.codecool.barbershop.barbershop.client;
+package com.codecool.barbershop.barbershop.client.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

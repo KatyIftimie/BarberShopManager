@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ClientRepository extends JpaRepository<ClientModel, Long> {
     ClientModel getByClientId(long clientId);
 
-    @Modifying
-    @Query("delete from ClientModel c where c.clientId= :clientId")
-    void deleteClientModelByClientId(long clientId);
 
 
 

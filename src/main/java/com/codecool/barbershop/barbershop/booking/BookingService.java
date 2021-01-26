@@ -35,6 +35,7 @@ public class BookingService {
 
 //        Set the data & Save
         newBookingModel.setCreatedDate(today);
+        newBookingModel.setUpdatedDate(today);
         newBookingModel.setBookingDate(bookingDTO.getBookingDate());
         newBookingModel.setClientModel(client);
 
@@ -44,13 +45,16 @@ public class BookingService {
     public BookingModel updateStatusBooking(int bookingId, String newBookingStatus) {
         Optional<BookingModel> booking = bookingRepository.findById(bookingId);
 
-        if(booking.isPresent()){
+        if (booking.isPresent()) {
             booking.get().setBookingStatus(BookingStatus.valueOf(newBookingStatus.toUpperCase(Locale.ROOT)));
-           return bookingRepository.save(booking.get());
-        }else {
+            return bookingRepository.save(booking.get());
+        } else {
             return null;
-
         }
+    }
+
+    public List<BookingModel> getAllBookingsByClientId(Long clientId) {
+        return bookingRepository.findAllByClientModel_ClientId(clientId);
 
 
     }
