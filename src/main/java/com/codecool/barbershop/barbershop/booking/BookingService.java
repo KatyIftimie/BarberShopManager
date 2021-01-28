@@ -42,16 +42,16 @@ public class BookingService {
         return bookingRepository.save(newBookingModel);
     }
 
-    public BookingModel updateStatusBooking(int bookingId, String newBookingStatus) {
-        Optional<BookingModel> booking = bookingRepository.findById(bookingId);
-
-        if (booking.isPresent()) {
-            booking.get().setBookingStatus(BookingStatus.valueOf(newBookingStatus.toUpperCase(Locale.ROOT)));
-            return bookingRepository.save(booking.get());
-        } else {
-            return null;
-        }
-    }
+//    public BookingModel updateStatusBooking(int bookingId, String newBookingStatus) {
+//        Optional<BookingModel> booking = bookingRepository.findById(bookingId);
+//
+//        if (booking.isPresent()) {
+//            booking.get().setStatus(BookingStatus.valueOf(newBookingStatus.toUpperCase(Locale.ROOT)));
+//            return bookingRepository.save(booking.get());
+//        } else {
+//            return null;
+//        }
+//    }
 
     public List<BookingModel> getAllBookingsByClientId(Long clientId) {
         return bookingRepository.findAllByClientModel_ClientId(clientId);

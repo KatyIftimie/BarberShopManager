@@ -33,9 +33,9 @@ public class BookingController {
         return bookingService.saveNewBooking(bookingDTO);
     }
 
-    @PutMapping("{bookingId}/{newBookingStatus}")
-    public BookingModel updateStatusBooking(@PathVariable int bookingId, @PathVariable String newBookingStatus) throws IllegalArgumentException{
-        return bookingService.updateStatusBooking(bookingId,newBookingStatus);
-    }
+//    @PutMapping("{bookingId}/{newBookingStatus}")
+//    public BookingModel updateStatusBooking(@PathVariable int bookingId, @PathVariable String newBookingStatus) throws IllegalArgumentException{
+//        return bookingService.updateStatusBooking(bookingId,newBookingStatus);
+//    }
 
 }
