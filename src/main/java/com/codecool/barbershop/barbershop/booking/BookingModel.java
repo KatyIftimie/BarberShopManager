@@ -15,6 +15,7 @@ import java.util.Date;
 @Table(name = "bookings")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BookingModel {
 
     @Id
