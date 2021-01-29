@@ -33,8 +33,10 @@ public class BookingModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 
-    @Enumerated(EnumType.STRING)
-    private BookingStatus bookingStatus = BookingStatus.UPCOMING;
+    @ManyToOne
+    @JoinColumn(name = "booking_status_id", referencedColumnName = "Id")
+    private BookingStatus status;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
