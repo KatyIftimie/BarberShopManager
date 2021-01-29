@@ -1,5 +1,7 @@
 package com.codecool.barbershop.barbershop.booking;
 
+import com.codecool.barbershop.barbershop.booking.request.BookingDTO;
+import com.codecool.barbershop.barbershop.booking.request.DashboardData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,13 @@ public class BookingController {
     @PutMapping("{bookingId}/{newBookingStatus}")
     public BookingModel updateStatusBooking(@PathVariable int bookingId, @PathVariable String newBookingStatus) throws IllegalArgumentException{
         return bookingService.updateStatusBooking(bookingId,newBookingStatus);
+    }
+
+//    dashboard
+    @GetMapping("dashboard")
+    public DashboardData getDashboardData(){
+
+        return bookingService.getDataForDashBoard();
     }
 
 }

@@ -54,10 +54,5 @@ public class ClientController {
     public List<ClientSearchAutocompleteReq> searchClientWithAutocomplete(){
         return clientService.searchClientWithAutocomplete();
     }
-    @GetMapping("total-clients")
-    public int totalClients(){
-        return clientService.getTotalClients();
-    }
-
 
 }
